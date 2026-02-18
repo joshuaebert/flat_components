@@ -12,7 +12,8 @@ qt_add_qml_module(${PROJECT_NAME}
 
         QML_FILES
         ui/FlatComponents/Theme.qml
-
+        ui/FlatComponents/Ripple.qml
+        ui/FlatComponents/Shadow.qml
 
         RESOURCES
         ui/fonts/fa7.otf
