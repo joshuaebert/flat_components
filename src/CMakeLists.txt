@@ -11,10 +11,15 @@ qt_add_qml_module(${PROJECT_NAME}
         VERSION 1.0
 
         QML_FILES
+        ui/Main.qml
+
         ui/FlatComponents/Theme.qml
         ui/FlatComponents/Ripple.qml
         ui/FlatComponents/Shadow.qml
         ui/FlatComponents/Button.qml
+        ui/FlatComponents/IconButton.qml
+        ui/FlatComponents/TextField.qml
+        ui/FlatComponents/Layer.qml
 
         RESOURCES
         ui/fonts/fa7.otf
