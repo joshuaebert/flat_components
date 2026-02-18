@@ -1,2 +1,5 @@
 module FlatComponents
 singleton Theme 1.0 Theme.qml
+Shadow 1.0 Shadow.qml
+Layer 1.0 Layer.qml
+Button 1.0 Button.qml
