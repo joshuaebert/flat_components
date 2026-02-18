@@ -5,3 +5,4 @@ Ripple 1.0 Ripple.qml
 Layer 1.0 Layer.qml
 Button 1.0 Button.qml
 IconButton 1.0 IconButton.qml
+TextField 1.0 TextField.qml
