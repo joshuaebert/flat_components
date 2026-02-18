@@ -203,13 +203,11 @@ Window {
                         anchors.leftMargin: 60
                         anchors.topMargin: 40
                         spacing: 6
-                        Flat.TextField {
-                            id: textField
-                            placeholderText: "Hallo"
-                            exampleText: "Hallo 2"
-                        }
-                        Flat.TextField {
-                            id: textField2
+                        Text {
+                            text: "Welcome to Flat Components!"
+                            font.pixelSize: 42
+                            font.weight: Font.Bold
+                            color: Flat.Theme.neutralTextOnSurface
                         }
                     }
                 }

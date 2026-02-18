@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
 
     QQmlApplicationEngine engine;
 
+    engine.loadFromModule("components", "Main");
 
     if (engine.rootObjects().isEmpty()) {
         return -1;
