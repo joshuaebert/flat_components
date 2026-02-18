@@ -1,0 +1,5 @@
+module Categories
+Buttons 1.0 Buttons.qml
+Layers 1.0 Layers.qml
+Shadows 1.0 Shadows.qml
+TextFields 1.0 TextFields.qml

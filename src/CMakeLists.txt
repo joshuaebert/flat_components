@@ -21,9 +21,16 @@ qt_add_qml_module(${PROJECT_NAME}
         ui/FlatComponents/TextField.qml
         ui/FlatComponents/Layer.qml
 
+        ui/Categories/Buttons.qml
+        ui/Categories/Layers.qml
+        ui/Categories/Shadows.qml
+        ui/Categories/Ripples.qml
+        ui/Categories/TextFields.qml
+
         RESOURCES
         ui/fonts/fa7.otf
         ui/FlatComponents/qmldir
+        ui/Categories/qmldir
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Quick Qt6::QuickControls2)
