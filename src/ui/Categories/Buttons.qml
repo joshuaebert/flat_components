@@ -174,7 +174,7 @@ Flat.Layer {
                             spacing: 12
                             Flat.Button {
                                 text: "Save"
-                                icon.name: "\uF0C7"
+                                iconText: "\uF0C7"
                                 buttonStyle: Flat.Theme.ButtonStyle.Filled
                             }
                             Text {
@@ -191,7 +191,7 @@ Flat.Layer {
                             spacing: 12
                             Flat.Button {
                                 text: "Delete"
-                                icon.name: "\uF1F8"
+                                iconText: "\uF1F8"
                                 buttonStyle: Flat.Theme.ButtonStyle.Outlined
                             }
                             Text {
@@ -208,7 +208,7 @@ Flat.Layer {
                             spacing: 12
                             Flat.Button {
                                 text: "Settings"
-                                icon.name: "\uF013"
+                                iconText: "\uF013"
                                 buttonStyle: Flat.Theme.ButtonStyle.Text
                             }
                             Text {
@@ -631,7 +631,7 @@ Flat.Layer {
                         Flat.Button {
                             id: toggleButton
                             text: "Toggle Buttons"
-                            icon.name: "\uF0EC"
+                            iconText: "\uF0EC"
                             buttonStyle: Flat.Theme.ButtonStyle.Filled
                             onClicked: {
                                 demoButton1.enabled = !demoButton1.enabled

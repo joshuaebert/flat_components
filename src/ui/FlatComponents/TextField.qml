@@ -69,7 +69,7 @@ Item {
         rightPadding: 4
         anchors.rightMargin: 4
         verticalAlignment: TextInput.AlignVCenter
-        topPadding: 10
+        topPadding: 14
         font.pixelSize: 14
         focus: true
         clip: true
@@ -137,7 +137,7 @@ Item {
             anchors.fill: parent
             leftPadding: 4
             rightPadding: 4
-            topPadding: 10
+            topPadding: 14
             verticalAlignment: Text.AlignVCenter
 
             font.pixelSize: 14
@@ -200,7 +200,7 @@ Item {
                 when: !hasText && !hasFocus
                 PropertyChanges {
                     target: placeholder
-                    y: (root.height - 16) / 2
+                    y: (root.height - font.pixelSize) / 2
                     scale: 1.0
                     leftPadding: 8
                     color: Theme.textOnSurfaceDisabled

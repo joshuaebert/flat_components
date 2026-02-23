@@ -2,15 +2,19 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 
-Button {
+Item {
     id: root
     property bool dropShadow: true
     property int buttonStyle: Theme.ButtonStyle.Filled
 
-    topPadding: Theme.paddingMedium
-    bottomPadding: Theme.paddingMedium
-    leftPadding: Theme.paddingLarge
-    rightPadding: Theme.paddingLarge
+    property alias text: labelText.text
+    property alias iconText: iconText.text
+    property bool hovered: false
+
+    implicitWidth: (Theme.paddingLarge * 2) + labelText.contentWidth + (iconText.visible ? iconText.contentWidth : 0)
+    implicitHeight: (Theme.paddingMedium * 2) + labelText.contentHeight
+
+    signal clicked()
 
     states: [
         State {
@@ -83,41 +87,41 @@ Button {
         }
     ]
 
-    background: Item {
-        Rectangle {
-            id: bg
-            anchors.fill: parent
-            radius: Theme.radiusMedium
+    Rectangle {
+        id: bg
+        anchors.fill: parent
+        radius: Theme.radiusMedium
 
-            Ripple {
-                id: rippleEffect
-            }
-
-            layer.enabled: root.enabled && root.dropShadow
-            layer.effect: Shadow {
-                show: root.hovered
-            }
-
-            Behavior on border.color {
-                ColorAnimation {
-                    duration: Theme.animationNormal
-                    easing.type: Easing.InOutQuad
-                }
-            }
-
-            /*Behavior on color {
-                ColorAnimation {
-                    duration: Theme.animationNormal
-                    easing.type: Easing.InOutQuad
-                }
-            }*/
+        Ripple {
+            id: rippleEffect
         }
+
+        layer.enabled: root.enabled && root.dropShadow
+        layer.effect: Shadow {
+            show: root.hovered
+        }
+
+        Behavior on border
+        .
+        color {
+            ColorAnimation {
+                duration: Theme.animationNormal
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        /*Behavior on color {
+            ColorAnimation {
+                duration: Theme.animationNormal
+                easing.type: Easing.InOutQuad
+            }
+        }*/
     }
 
 
-    contentItem: Row {
+    Row {
         spacing: 6
-        anchors.centerIn: parent
+        anchors.centerIn: bg
 
         FontLoader {
             id: iconFont
@@ -126,10 +130,10 @@ Button {
 
         Text {
             id: iconText
-            text: root.icon.name
+            text: root.iconText
             font.family: iconFont.name
             font.pixelSize: 20
-            visible: root.icon.name !== ""
+            visible: root.iconText !== ""
 
             /*Behavior on color {
                 ColorAnimation {
@@ -155,10 +159,20 @@ Button {
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: (mouse) => {
             rippleEffect.trigger(mouse.x, mouse.y)
             root.clicked()
+        }
+
+        onEntered: {
+            root.hovered = true
+        }
+
+        onExited: {
+            root.hovered = false
         }
     }
 }
