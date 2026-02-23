@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 
-Item {
+Rectangle {
     id: root
     property bool dropShadow: true
     property int buttonStyle: Theme.ButtonStyle.Filled
@@ -10,6 +10,9 @@ Item {
     property alias text: labelText.text
     property alias iconText: iconText.text
     property bool hovered: false
+
+    color: "transparent"
+    radius: Theme.radiusMedium
 
     implicitWidth: (Theme.paddingLarge * 2) + labelText.contentWidth + (iconText.visible ? iconText.contentWidth : 0)
     implicitHeight: (Theme.paddingMedium * 2) + labelText.contentHeight
@@ -65,7 +68,8 @@ Item {
             when: buttonStyle === Theme.ButtonStyle.Text
             PropertyChanges {
                 target: bg
-                color: "transparent"
+                color: Theme.neutralTextOnSurface
+                opacity: root.hovered ? 0.05 : 0.0
                 border.width: 0
             }
             PropertyChanges {
@@ -90,32 +94,30 @@ Item {
     Rectangle {
         id: bg
         anchors.fill: parent
-        radius: Theme.radiusMedium
-
-        Ripple {
-            id: rippleEffect
-        }
+        radius: parent.radius
 
         layer.enabled: root.enabled && root.dropShadow
         layer.effect: Shadow {
             show: root.hovered
         }
 
-        Behavior on border
-        .
-        color {
+        Behavior on border.color {
             ColorAnimation {
                 duration: Theme.animationNormal
                 easing.type: Easing.InOutQuad
             }
         }
 
-        /*Behavior on color {
-            ColorAnimation {
+        Behavior on opacity {
+            NumberAnimation {
                 duration: Theme.animationNormal
                 easing.type: Easing.InOutQuad
             }
-        }*/
+        }
+    }
+
+    Ripple {
+        id: rippleEffect
     }
 
 
