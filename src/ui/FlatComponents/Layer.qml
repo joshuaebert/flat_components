@@ -9,8 +9,12 @@ Rectangle {
     z: 1000 - level
 
     color: {
-        const baseFactor = 1.0 + (level * 0.05)
-        return Qt.darker(Theme.surface, baseFactor)
+        const baseFactor = 1.0 + (level * 0.08)
+        if (Theme.theme === Theme.Theme.Light) {
+            return Qt.darker(Theme.surface, baseFactor)
+        }
+
+        return Qt.lighter(Theme.surface, baseFactor)
     }
 
     layer.enabled: shadow
