@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Effects
 import QtQuick.Layouts
 
-Button {
+Rectangle {
     id: root
 
     implicitWidth: diameter
@@ -15,6 +15,14 @@ Button {
     property bool dropShadow: true
     property int buttonStyle: Theme.ButtonStyle.Filled
     property int diameter: 48
+    property alias text: iconText.text
+    property bool hovered: false
+
+    color: "transparent"
+    // use half of the smallest side so the rectangle becomes a circle
+    radius: Math.min(width, height) / 2
+
+    signal clicked()
 
     states: [
         State {
@@ -57,7 +65,8 @@ Button {
             when: buttonStyle === Theme.ButtonStyle.Text
             PropertyChanges {
                 target: bg
-                color: "transparent"
+                color: Theme.neutralTextOnSurface
+                opacity: root.hovered ? 0.05 : 0.0
                 border.width: 0
             }
             PropertyChanges {
@@ -75,29 +84,33 @@ Button {
         }
     ]
 
-    background: Item {
-        Rectangle {
-            id: bg
-            anchors.fill: parent
-            // use half of the smallest side so the rectangle becomes a circle
-            radius: Math.min(bg.width, bg.height) / 2
+    Rectangle {
+        id: bg
+        anchors.fill: parent
+        radius: parent.radius
 
-            Ripple {
-                id: rippleEffect
-            }
-
-            layer.enabled: root.enabled && root.dropShadow
-            layer.effect: Shadow {
-                show: root.hovered
-            }
-
-            /*Behavior on color {
-                ColorAnimation {
-                    duration: Theme.animationNormal
-                    easing.type: Easing.InOutQuad
-                }
-            }*/
+        layer.enabled: root.enabled && root.dropShadow
+        layer.effect: Shadow {
+            show: root.hovered
         }
+
+        Behavior on border.color {
+            ColorAnimation {
+                duration: Theme.animationNormal
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Theme.animationNormal
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
+
+    Ripple {
+        id: rippleEffect
     }
 
     FontLoader {
@@ -105,30 +118,31 @@ Button {
         source: "../fonts/fa7.otf"
     }
 
-    contentItem: Item {
-        Text {
-            id: iconText
-            anchors.fill: parent
-            text: root.text
-            font.family: iconFont.name
-            font.pixelSize: 20
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-
-            /*Behavior on color {
-                ColorAnimation {
-                    duration: Theme.animationNormal
-                    easing.type: Easing.InOutQuad
-                }
-            }*/
-        }
+    Text {
+        id: iconText
+        anchors.fill: parent
+        text: root.text
+        font.family: iconFont.name
+        font.pixelSize: 20
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: (mouse) => {
             rippleEffect.trigger(mouse.x, mouse.y)
             root.clicked()
+        }
+
+        onEntered: {
+            root.hovered = true
+        }
+
+        onExited: {
+            root.hovered = false
         }
     }
 }
